@@ -21,7 +21,7 @@ export default class CanvasTreeDrawer {
 
   redraw (tree, x, y) {
     this.clear()
-    this.draw(tree, x, y)
+    this.drawElement(tree, x, y)
   }
 
   clear () {
@@ -29,12 +29,12 @@ export default class CanvasTreeDrawer {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
   }
 
-  draw (fig, x0, y0) {
-    if (fig.type === 'condition') {
-      this.drawCondition(fig, x0, y0)
+  drawElement (el, x0, y0) {
+    if (el.type === 'condition') {
+      this.drawCondition(el, x0, y0)
     }
-    if (fig.type === 'action') {
-      this.drawAction(fig, x0, y0)
+    if (el.type === 'action') {
+      this.drawAction(el, x0, y0)
     }
   }
 
@@ -48,7 +48,7 @@ export default class CanvasTreeDrawer {
       y0 + FIGURE_HEIGHT + HEIGHT_SPACE
     )
     if (actionObj.child) {
-      this.draw(
+      this.drawElement(
         actionObj.child,
         x0,
         y0 + FIGURE_HEIGHT + HEIGHT_SPACE
@@ -67,17 +67,17 @@ export default class CanvasTreeDrawer {
     drawHexagon(this.ctx, x0, y0)
     const childY = y0 + FIGURE_HEIGHT + HEIGHT_SPACE
     if (hexagonObj.leftChild) {
-      const childX = x0 - (1 + hexagonObj.leftChild.rightWidth) * FIGURE_WIDTH
-      this.draw(
-        hexagonObj.leftChild,
-        childX,
-        childY
-      )
+      const leftChildX = x0 - (1 + hexagonObj.leftChild.rightWidth) * FIGURE_WIDTH
       drawArrow(
         this.ctx,
         x0,
         y0 + FIGURE_HALF_HEIGHT,
-        childX + FIGURE_HALF_WIDTH,
+        leftChildX + FIGURE_HALF_WIDTH,
+        childY
+      )
+      this.drawElement(
+        hexagonObj.leftChild,
+        leftChildX,
         childY
       )
     } else {
@@ -96,17 +96,17 @@ export default class CanvasTreeDrawer {
       )
     }
     if (hexagonObj.rightChild) {
-      const childX = x0 + (1 + hexagonObj.rightChild.leftWidth) * FIGURE_WIDTH
-      this.draw(
-        hexagonObj.rightChild,
-        childX,
-        childY
-      )
+      const rightChildX = x0 + (1 + hexagonObj.rightChild.leftWidth) * FIGURE_WIDTH
       drawArrow(
         this.ctx,
         x0 + FIGURE_WIDTH,
         y0 + FIGURE_HALF_HEIGHT,
-        childX + FIGURE_HALF_WIDTH,
+        rightChildX + FIGURE_HALF_WIDTH,
+        childY
+      )
+      this.drawElement(
+        hexagonObj.rightChild,
+        rightChildX,
         childY
       )
     } else {
