@@ -6,7 +6,9 @@ import {
   FIGURE_WIDTH_WO_ARC_LENGTH,
   FIGURE_HEIGHT_WO_ARC_LENGTH,
   FIGURE_PLUS_WIDTH,
-  FIGURE_PLUS_HALF_WIDTH
+  FIGURE_PLUS_HALF_WIDTH,
+  FIGURE_PLUS_ARC_LENGTH,
+  FIGURE_PLUS_WIDTH_WO_ARC_LENGTH
 } from './constants'
 
 export function drawOval (ctx, x, y) {
@@ -80,11 +82,26 @@ export function drawArrow (ctx, x1, y1, x2, y2) {
 }
 
 export function drawPlus (ctx, x, y) {
+  const xFigureEnd = x + FIGURE_PLUS_WIDTH
+  const yFigureEnd = y + FIGURE_PLUS_WIDTH
+  const path = new Path2D()
+  path.moveTo(x, y + FIGURE_PLUS_ARC_LENGTH)
+  path.quadraticCurveTo(x, y, x + FIGURE_PLUS_ARC_LENGTH, y)
+  path.lineTo(x + FIGURE_PLUS_WIDTH_WO_ARC_LENGTH, y)
+  path.quadraticCurveTo(xFigureEnd, y, xFigureEnd, y + FIGURE_PLUS_ARC_LENGTH)
+  path.lineTo(xFigureEnd, y + FIGURE_PLUS_WIDTH_WO_ARC_LENGTH)
+  path.quadraticCurveTo(xFigureEnd, yFigureEnd, x + FIGURE_PLUS_WIDTH_WO_ARC_LENGTH, yFigureEnd)
+  path.lineTo(x + FIGURE_PLUS_ARC_LENGTH, yFigureEnd)
+  path.quadraticCurveTo(x, yFigureEnd, x, y + FIGURE_PLUS_WIDTH_WO_ARC_LENGTH)
+  path.closePath()
+  ctx.strokeStyle = '#308ADF'
   ctx.fillStyle = '#308ADF'
-  ctx.fillRect(x, y, FIGURE_PLUS_WIDTH, FIGURE_PLUS_WIDTH)
+  ctx.stroke(path)
+  ctx.fill(path)
+
   ctx.fillStyle = '#FFF'
-  ctx.font = `${Math.round(FIGURE_PLUS_WIDTH / 1.5)}px arial`
+  ctx.font = `22px arial`
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
-  ctx.fillText('+', x + (FIGURE_PLUS_WIDTH / 2), y + FIGURE_PLUS_HALF_WIDTH)
+  ctx.fillText('\uFF0B', x + (FIGURE_PLUS_WIDTH / 2), y + FIGURE_PLUS_HALF_WIDTH)
 }

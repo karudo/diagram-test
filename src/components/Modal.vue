@@ -38,7 +38,7 @@
   .modal-container {
     width: 300px;
     margin: 0px auto;
-    padding: 10px;
+    padding: 20px;
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
@@ -48,8 +48,10 @@
 
   .modal-text {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 20px;
+    font-size: 20px;
+    color: #B2BAC1;
   }
 
   .modal-buttons {
