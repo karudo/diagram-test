@@ -4,9 +4,11 @@
       <div class="modal-wrapper">
         <div class="modal-container">
 
-          <div class="modal-body">
-            <button class="btn action" @click="$emit('add', 'action')">&#9651;</button>
+          <div class="modal-text">Select element to add:</div>
+
+          <div class="modal-buttons">
             <button class="btn condition" @click="$emit('add', 'condition')">&#11041;</button>
+            <button class="btn action" @click="$emit('add', 'action')">&#9651;</button>
           </div>
 
         </div>
@@ -44,7 +46,13 @@
     font-family: Helvetica, Arial, sans-serif;
   }
 
-  .modal-body {
+  .modal-text {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .modal-buttons {
     display: flex;
     justify-content: space-between;
   }
@@ -53,6 +61,7 @@
     color: white;
     width: 140px;
     height: 50px;
+    font-size: 24px;
   }
   .btn.action {
     background-color: #CE59DF;

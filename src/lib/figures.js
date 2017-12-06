@@ -83,7 +83,7 @@ export function drawPlus (ctx, x, y) {
   ctx.fillStyle = '#308ADF'
   ctx.fillRect(x, y, FIGURE_PLUS_WIDTH, FIGURE_PLUS_WIDTH)
   ctx.fillStyle = '#FFF'
-  ctx.font = `${FIGURE_PLUS_HALF_WIDTH}px arial`
+  ctx.font = `${Math.round(FIGURE_PLUS_WIDTH / 1.5)}px arial`
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   ctx.fillText('+', x + (FIGURE_PLUS_WIDTH / 2), y + FIGURE_PLUS_HALF_WIDTH)
